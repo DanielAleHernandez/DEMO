@@ -15,7 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TestReport
@@ -49,7 +52,7 @@ public class TestReport
 
     public void generateTestReport() throws IOException {
         // Generar PDF
-        String pdfFilePath = PDF_PATH + testName + "_report.pdf";
+        String pdfFilePath = PDF_PATH + testName+ "_"+PdfUtil.dateTime() + "_report.pdf";
         PdfUtil.generatePdfFromImages(screenshotPaths, descriptions, pdfFilePath);
     }
 
@@ -128,6 +131,12 @@ public class TestReport
             // Cerrar el documento
             document.close();
             System.out.println("PDF generado en: " + outputPdf);
+        }
+
+        public static String dateTime() {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+            Date date = new Date();
+            return dateFormat.format(date);
         }
     }
 }
