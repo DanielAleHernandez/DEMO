@@ -2,10 +2,12 @@ package test;
 
 import manager.DriverManager;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import page.DashboardPage;
+import utils.TestReport;
+
+import java.io.IOException;
 
 /**
  * Project: DEMO
@@ -19,6 +21,7 @@ import page.DashboardPage;
  */
 public class BaseTest {
     protected DashboardPage dashboardPage;
+    protected TestReport report;
     private static final String URL_TEST_PAGE = "https://www.mercadolibre.com.mx/";
     private void goToUrl(){
         DriverManager.getDriver().get(URL_TEST_PAGE);
@@ -26,7 +29,7 @@ public class BaseTest {
     /**
      * Se ejecuta Antes de cada Test
      */
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest( ){
         DriverManager.initDriver(); // Se crea el driver
 
@@ -38,8 +41,13 @@ public class BaseTest {
     /**
      * Se ejecuta despues de cada Test
      */
-    @AfterTest
-    public void afterTest(){
-        DriverManager.getDriver().close();
+    @AfterMethod
+    public void afterTest() throws IOException {
+        report.generateTestReport();
+        if (DriverManager.getDriver() != null) {
+
+            DriverManager.getDriver().quit();
+        }
+
     }
 }

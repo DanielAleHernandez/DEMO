@@ -25,23 +25,28 @@ public class DashboardPage extends BasePage {
 
     //Dar clic en la opcion categorias
     @FindBy(xpath = "/html/body/header/div/div[5]/div/ul/li[1]")
+    WebElement optionCategorias;
 
-    private WebElement optionCategorias;
+//Dar clic en la opcion Vehiculos
+    @FindBy(xpath = "/html/body/header/div/div[5]/div/ul/li[1]/div/ul/li[1]/a")
+    //@FindBy(xpath = "/html/body/header/div/div[5]/div/ul/li[1]/div/ul/li[1]/as")
+    WebElement selectVehiculos;
 
-    @FindBy(xpath = "/html/body/header/div/div[5]/div/ul/li[1]/div/ul/li[7]")
-    private WebElement selectDeportesYFitness;
+    //@FindBy(xpath = "/html/body/header/diiv/div[5]/div/ul/li[1]/div/ul/li[7]")
+    @FindBy(xpath = "/html/body/header/div/div[5]/div/ul/li[1]/div/ul/li[7]/a")
+    WebElement selectDeportesYFitness;
 
     @FindBy(xpath = "/html/body/header/div/div[2]/form/input")
-    private WebElement barraBusqueda;
+    WebElement barraBusqueda;
 
     @FindBy(xpath = "/html/body/header/div/div[2]/form/button")
-    private WebElement btnRealizarBusqueda;
+    WebElement btnRealizarBusqueda;
 
     @FindBy(xpath = "/html/body/main/div/div[2]/section/ol/li[1]/div")
-    private WebElement seleccionarProductoBuscado;
+    WebElement seleccionarProductoBuscado;
 
     @FindBy(xpath = "/html/body/main/div[2]/div[4]/div[2]/div[1]/div/div[2]")
-    private WebElement caracteristicasDelProducto;
+    WebElement caracteristicasDelProducto;
 
     /*@FindBy(xpath = "")
     public WebElement c;]]
@@ -82,9 +87,9 @@ public class DashboardPage extends BasePage {
         onClick(barraBusqueda);
     }
 
-    public void sendKetBarraBusqueda(){
+    public void sendKetBarraBusqueda(String txt){
         clear(barraBusqueda);
-
+        sendKeys(barraBusqueda,txt);
     }
 
     public void highlighBtnBuscar(){
@@ -97,6 +102,42 @@ public class DashboardPage extends BasePage {
 
     public void onClickBtnBuscar(){
         onClick(btnRealizarBusqueda);
+    }
+
+    public void highlighSelectProduct(){
+        highlightElement(seleccionarProductoBuscado);
+    }
+
+    public void unHighlightSelectProduct(){
+        unhighlightElement(seleccionarProductoBuscado);
+    }
+
+    public void onClickSelectProduct(){
+        onClick(seleccionarProductoBuscado);
+    }
+
+ public void highlighCaracteristicasProduct(){
+        highlightElement(caracteristicasDelProducto);
+    }
+
+    public void unHighlightCaracteristicasProduct(){
+        unhighlightElement(caracteristicasDelProducto);
+    }
+
+    public void onClickCaracteristicasProduct(){
+        onClick(caracteristicasDelProducto);
+    }
+
+    public void onClickSelectVehiculos(){
+        onClick(selectVehiculos);
+    }
+
+    public void highlighVehiculo(){
+        highlightElement(selectVehiculos);
+    }
+
+    public void unHighlightVehiculo(){
+        unhighlightElement(selectVehiculos);
     }
 
 }

@@ -7,11 +7,14 @@
     <listeners>
         <listener class-name = "utils.TestListener"/>
     </listeners>
-    <test name="MercadoLibre">
-        <!-- <parameter name="udid" value="emulator-5554" />-->
-       <!--  <parameter name="deviceName" value="Emulador" />-->
-         <classes>
-             <class name="test.BusquedaProducto"/>
+    <test name="test.BusquedaDeProducto">
+
+        <!--  <parameter name="browser" value="chrome" />-->
+          <classes>
+              <class name="test.BusquedaDeProducto">
+                  <!--<methods><include name="selectVehiculos"/></methods>-->
+                 <!--<methods><include name="selectVehiculos"/></methods>-->
+             </class>
          </classes>
      </test>
  </suite> <!-- Suite -->

@@ -30,8 +30,10 @@ public class TestReport
     private List<String> screenshotPaths = new ArrayList<>();
     private List<String> descriptions = new ArrayList<>();
 
+    private int cont;
     public TestReport(String testName) {
         this.testName = testName;
+        cont = 1;
     }
 
     /**
@@ -41,10 +43,29 @@ public class TestReport
      * @param fileName    Nombre del archivo de la captura.
      */
     public void takeScreenshot(WebDriver driver, String description, String fileName) {
-        String screenshotPath = ScreenshotUtil.saveScreenshot(driver, testName, fileName);
+        String screenshotPath = ScreenshotUtil.saveScreenshot(driver, testName,  "_"+PdfUtil.dateTime() + "_"+fileName);
         screenshotPaths.add(screenshotPath);
         descriptions.add(description);
     }
+
+    public void takeScreenshot(WebDriver driver, String description) {
+        String screenshotPath = ScreenshotUtil.saveScreenshot(driver,
+                testName,  PdfUtil.dateTime() + "_step"+(cont++)+"_"+noSpaces(description)+".png");
+        screenshotPaths.add(screenshotPath);
+        descriptions.add(description);
+    }
+
+
+    private String noSpaces(String txt){
+        String temp = "";
+        for (int i = 0; i < txt.length(); i++){
+            if(txt.charAt(i) != ' '){
+                temp+= txt.charAt(i);
+            }
+        }
+        return temp;
+    }
+
 
     /**
      * Genera el PDF con las capturas tomadas durante la prueba.
