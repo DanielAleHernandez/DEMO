@@ -22,7 +22,9 @@ public class DriverManager {
     public static WebDriver getDriver() {
         return driver;
     }
-
+    public static void setDriver(WebDriver _driver){
+        driver = _driver;
+    }
     /**
      * Inicializamos el web driver de Google Chrome
      */
@@ -30,6 +32,17 @@ public class DriverManager {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+    }
+    /**
+     * Inicializamos el web driver de Google Chrome
+     */
+    public static void initDriver(String browser){
+        if(browser.equals("Chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(options);
+        }
         driver.manage().window().maximize();
     }
 }
