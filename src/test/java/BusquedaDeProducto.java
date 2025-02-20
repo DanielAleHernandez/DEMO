@@ -2,40 +2,32 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.Test;
-import pages.Dashboard_Page;
+import page.BasePage;
 import utils.TestReport;
 import utils.Utils;
 
 import java.io.IOException;
 
-public class BusquedaDeProducto
-{
+public class BusquedaDeProducto {
     WebDriver driver;
     TestReport report = new TestReport("BusquedaDeProducto");
     Utils utils = new Utils();
 
 
-    public void setup () throws InterruptedException
-    {
+    public void setup ()  {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-
-
     }
 
-    public void paginaInicial() throws InterruptedException
-    {
+    public void paginaInicial() {
         driver.get("https://www.mercadolibre.com.mx/");
     }
 
     public void darClickenCategorias() throws InterruptedException
     {
-        Dashboard_Page dashboard_page = new Dashboard_Page(driver);
+        BasePage.Dashboard_Page dashboard_page = new BasePage.Dashboard_Page(driver);
         utils.highlightElement(driver, dashboard_page.optionCategorias);
         report.takeScreenshot(driver,"Dar click en la opción de categorias para visualizar las categorias existentes", "step1_darClickEnLaOpciónDeCategoriasParaVisualizarLasCategoriasExistentes.png");
         utils.unhighlightElement(driver, dashboard_page.optionCategorias);
@@ -45,7 +37,7 @@ public class BusquedaDeProducto
 
     public void seleccionarCategoria() throws InterruptedException
     {
-        Dashboard_Page dashboard_page = new Dashboard_Page(driver);
+        BasePage.Dashboard_Page dashboard_page = new BasePage.Dashboard_Page(driver);
         utils.highlightElement(driver, dashboard_page.selectDeportesYFitness);
         report.takeScreenshot(driver, "Seleccionar y dar click en la opcion -Deportes y Fitness-", "step2_seleccionarYDarClickEnLaOpcionDeportesYFitness.png" );
         utils.unhighlightElement(driver, dashboard_page.selectDeportesYFitness);
@@ -55,7 +47,7 @@ public class BusquedaDeProducto
 
     public void realizarBusqueda() throws InterruptedException
     {
-        Dashboard_Page dashboard_page = new Dashboard_Page(driver);
+        BasePage.Dashboard_Page dashboard_page = new BasePage.Dashboard_Page(driver);
         utils.highlightElement(driver, dashboard_page.barraBusqueda);
         report.takeScreenshot(driver, "Dar Click en la barra de busqueda, para buscar el producto deseado", "step3_darClickEnLaBarraDeBusquedaParaBuscarElProductoDeseado.png");
         utils.unhighlightElement(driver, dashboard_page.barraBusqueda);
@@ -75,7 +67,7 @@ public class BusquedaDeProducto
 
     public void seleccionarProducto() throws InterruptedException
     {
-        Dashboard_Page dashboard_page = new Dashboard_Page(driver);
+        BasePage.Dashboard_Page dashboard_page = new BasePage.Dashboard_Page(driver);
         utils.highlightElement(driver, dashboard_page.seleccionarProductoBuscado);
         report.takeScreenshot(driver, "Seleccionar producto buscado","step6_seleccionarProductoBuscado.png");
         utils.unhighlightElement(driver, dashboard_page.seleccionarProductoBuscado);
@@ -85,7 +77,7 @@ public class BusquedaDeProducto
 
     public void visualizarCaracteristicasDelProducto() throws InterruptedException
     {
-        Dashboard_Page dashboard_page = new Dashboard_Page(driver);
+        BasePage.Dashboard_Page dashboard_page = new BasePage.Dashboard_Page(driver);
         utils.highlightElement(driver, dashboard_page.caracteristicasDelProducto);
         report.takeScreenshot(driver, "Visualizar Caracteristicas del producto","step7_visualizarCaracteristicasDelProducto.png");
         Thread.sleep(2000);

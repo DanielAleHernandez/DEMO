@@ -8,7 +8,13 @@
     <artifactId>DEMO</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <allure.version>2.26.0</allure.version>
+        <aspectj.version>1.9.22.1</aspectj.version>
+    </properties>
     <dependencies>
         <!-- Selenium -->
         <dependency>
@@ -24,12 +30,12 @@
             <version>5.9.2</version>
         </dependency>
 
-        <!-- Dependencia para Allure -->
+        <!-- Dependencia para Allure
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
-            <version>2.19.0</version> <!-- Usa la versión más reciente de Allure -->
-        </dependency>
+            <version>2.19.0</version>  Usa la versión más reciente de Allure
+        </dependency>-->
 
         <!-- Dependencia para Allure con TestNG (o JUnit) -->
         <dependency>
@@ -41,12 +47,19 @@
 
         <!-- Dependencia para JUnit (si usas JUnit en lugar de TestNG) -->
         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!--
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
-
+-->
         <!-- https://mvnrepository.com/artifact/com.itextpdf/itext7-core -->
         <dependency>
             <groupId>com.itextpdf</groupId>
@@ -54,17 +67,55 @@
             <version>7.2.6</version>
             <type>pom</type>
         </dependency>
-
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
     </dependencies>
 
-
+    <!--
+        <build>
+            <plugins>
+                Plugin para Allure
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version> 2.15.2</version>  Usa la versión más reciente
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>serve</goal> Abre el reporte de Allure automáticamente
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+        -->
     <build>
         <plugins>
-            <!-- Plugin para Allure -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>
+                        -Dfile.encoding=${project.build.sourceEncoding}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+
+            </plugin>
+
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version> 2.15.2</version> <!-- Usa la versión más reciente -->
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -73,16 +124,20 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
 
 
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
 </project>
