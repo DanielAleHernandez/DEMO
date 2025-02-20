@@ -22,7 +22,6 @@ public class BusquedaDeProducto extends BaseTest {
     public void selectVehiculos()  throws InterruptedException{
         report = new TestReport("Seleccionar categoria Vehiculos");
         darClickenCategorias();
-        //seleccionarCategoria();
         seleccionaVeiculo();
         Thread.sleep(8000);
     }
